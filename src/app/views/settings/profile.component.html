@@ -1,0 +1,81 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+            <div class="card-header">
+                <strong>Profile-Settings</strong> 
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                            <form action="" method="post" class="form-horizontal">
+                                <h6>General Information</h6>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-envelope-o"></i></span>
+                                            </div>
+                                            <input type="email" id="email" name="email" class="form-control" placeholder="Email" autocomplete="email" [(ngModel)]="this.email">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row mb-12">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                                            </div>
+                                            <input type="text" id="firstname" name="firstname" class="form-control" placeholder="First Name" [(ngModel)]="this.firstname">
+                                            <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Last Name" [(ngModel)]="this.lastname">
+                                        </div>
+                                    </div>
+                                </div><br>
+                                <h6>Security Information</h6>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                            </div>
+                                            <input type="password" id="oldPassword" name="oldPassword" class="form-control" placeholder="Current Password" [(ngModel)]="this.currentPassword">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                            </div>
+                                            <input type="password" id="newPassword1" name="newPassword1" class="form-control" placeholder="New Password" [(ngModel)]="this.newPassword1">
+                                        </div>
+                                        <div class="input-group mt-2">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                            </div>
+                                            <input type="password" id="newPassword2" name="newPassword2" class="form-control" placeholder="Repeat New Password" [(ngModel)]="this.newPassword2">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                        <div class="alert alert-danger" role="alert" *ngIf="this.error.length > 0">
+                        {{this.error}}
+                        </div>
+                        <div class="alert alert-success" role="alert" *ngIf="this.success.length > 0">
+                        {{this.success}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer ">
+                <button type="submit" class="btn btn-primary" (click)="submit()"><i class="fa fa-save"></i> Submit</button>
+                <div class="spinner-grow spinner-grow-sm text-primary ml-2" role="status" *ngIf="loading">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

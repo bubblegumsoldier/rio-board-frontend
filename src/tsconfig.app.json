@@ -8,6 +8,9 @@
     "paths": {
       "@angular/*": [
         "../node_modules/@angular/*"
+      ],
+      "@app/*": [
+        "./src/app/*"
       ]
     }
   },

@@ -8,12 +8,14 @@ import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
+import { AuthGuard } from './guards/auth.guard';
+import { AntiAuthGuard } from './guards/anti-auth.guard';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
-    pathMatch: 'full',
+    pathMatch: 'full'
   },
   {
     path: '404',
@@ -34,14 +36,16 @@ export const routes: Routes = [
     component: LoginComponent,
     data: {
       title: 'Login Page'
-    }
+    },
+    canActivate: [AntiAuthGuard]
   },
   {
     path: 'register',
     component: RegisterComponent,
     data: {
       title: 'Register Page'
-    }
+    },
+    canActivate: [AntiAuthGuard]
   },
   {
     path: '',
@@ -49,6 +53,7 @@ export const routes: Routes = [
     data: {
       title: 'Home'
     },
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'base',
@@ -81,6 +86,10 @@ export const routes: Routes = [
       {
         path: 'widgets',
         loadChildren: './views/widgets/widgets.module#WidgetsModule'
+      },
+      {
+        path: 'settings',
+        loadChildren: './views/settings/settings.module#SettingsModule'
       }
     ]
   },
