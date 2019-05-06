@@ -1,21 +1,20 @@
-import { Component, OnDestroy, Inject } from '@angular/core';
+import { Component, OnDestroy, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { navItems } from '../../_nav';
 import { UserService } from '../../services/user.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { NavBarItemsService } from '../../services/navBarItems.service';
 
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html'
 })
-export class DefaultLayoutComponent implements OnDestroy {
-  public navItems = navItems;
+export class DefaultLayoutComponent implements OnDestroy, OnInit {
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement;
-  constructor(private userService :UserService, private authenticationService :AuthenticationService, private router: Router, @Inject(DOCUMENT) _document?: any) {
+  constructor(private userService :UserService, private authenticationService :AuthenticationService, private navBarItems :NavBarItemsService, private router: Router, @Inject(DOCUMENT) _document?: any) {
 
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = _document.body.classList.contains('sidebar-minimized');
@@ -25,6 +24,10 @@ export class DefaultLayoutComponent implements OnDestroy {
       attributes: true,
       attributeFilter: ['class']
     });
+  }
+
+  ngOnInit() :void {
+    this.navBarItems.sync();
   }
 
   ngOnDestroy(): void {

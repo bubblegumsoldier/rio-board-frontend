@@ -46,6 +46,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { FormsModule } from '@angular/forms';
+import { SidebarNavCustomComponent } from './components/sidebar-nav-custom.component';
 
 @NgModule({
   imports: [
@@ -69,7 +70,8 @@ import { FormsModule } from '@angular/forms';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    SidebarNavCustomComponent
   ],
   providers: [{
     provide: LocationStrategy,

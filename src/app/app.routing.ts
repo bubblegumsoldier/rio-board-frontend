@@ -90,6 +90,10 @@ export const routes: Routes = [
       {
         path: 'settings',
         loadChildren: './views/settings/settings.module#SettingsModule'
+      },
+      {
+        path: 'projects',
+        loadChildren: './views/projects/projects.module#ProjectsModule'
       }
     ]
   },
