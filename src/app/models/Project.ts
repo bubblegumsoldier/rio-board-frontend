@@ -1,8 +1,6 @@
 export class Project
 {
-    name :string;
-    image :string;
-    securityToken :string;
-    publicAccess :string;
-    deleted :boolean;
+    name :string = "";
+    image :string = "";
+    publicAccess :number = 0;
 }

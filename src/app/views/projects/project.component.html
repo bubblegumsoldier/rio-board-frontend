@@ -1,7 +1,9 @@
-<div class="animated fadeIn">
+<h1>{{this.projectId}}</h1>
+
+<div class="animated fadeIn" *ngIf="this.project">
+    <h1 class="col-md-12">{{this.project.name}}</h1>
+    <p class="text-muted col-md-6">{{this.project.description}}</p>
     <div class="row">
-        <div class="col-sm-12">
-            No Widgets yet {{this.projectId}}
-        </div>
+        <app-add-component class="col-md-6"></app-add-component>
     </div>
 </div>

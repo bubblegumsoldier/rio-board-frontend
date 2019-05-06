@@ -44,7 +44,7 @@ export class NavBarItemsService {
 
     constructor(private http :HttpClient, private user :UserService, private projects :ProjectsService)
     {
-
+      this.projects.updatedProjects.subscribe(() => {this.sync()});
     }
 
     public sync()

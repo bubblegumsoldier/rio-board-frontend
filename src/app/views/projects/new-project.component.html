@@ -2,7 +2,89 @@
     <div class="row">
         <div class="col-sm-12">
             <h1>New Project</h1>
-            No Widgets yet
+            <span class="display-4">{{this.project.name}}</span><br>
+            <div class="card mt-4">
+                <div class="card-header">
+                    <strong>Project-Settings</strong> 
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                                <form action="" method="post" class="form-horizontal">
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Name</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-cube"></i></span>
+                                                </div>
+                                                <input type="name" id="name" name="name" class="form-control" placeholder="Project Name" [(ngModel)]="this.project.name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Description</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text"><i class="fa fa-paragraph"></i></span>
+                                                </div>
+                                                <textarea class="form-control" name="description" style="min-height: 200px" [(ngModel)]="this.project.description"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-md-3">Link-Sharing</label>
+                                        <div class="col-md-9">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <button class="btn" [class.btn-secondary]="this.project.publicAccess == 0"
+                                                                        [class.btn-success]="this.project.publicAccess == 1"
+                                                                        [class.btn-warning]="this.project.publicAccess == 2">
+                                                        <i class="fa fa-lock" *ngIf="this.project.publicAccess == 0"></i>
+                                                        <i class="fa fa-eye" *ngIf="this.project.publicAccess == 1"></i>
+                                                        <i class="fa fa-pencil" *ngIf="this.project.publicAccess == 2"></i>
+                                                    </button>
+                                                </div>
+                                                <select class="form-control" name="publicAccess" [(ngModel)]="this.project.publicAccess">
+                                                    <option [ngValue]="0">None</option>
+                                                    <option [ngValue]="1">Read</option>
+                                                    <option [ngValue]="2">Write</option>
+                                                </select>
+                                                <ng-template #popTemplate0>
+                                                Nobody can see your project.
+                                                </ng-template>
+                                                <ng-template #popTemplate1>
+                                                People with the private link can read everything but cannot edit anything.
+                                                </ng-template>
+                                                <ng-template #popTemplate2>
+                                                People with the private link can read and edit anything.
+                                                </ng-template>
+                                                <button class="btn-ghost-secondary btn" [tooltip]="(this.project.publicAccess == 0)?(popTemplate0):(this.project.publicAccess == 1 ? popTemplate1 : popTemplate2)" placement="right">
+                                                    <i class="fa fa-info-circle"></i>
+                                                </button>
+                                            </div>
+                                            <p><small class="text-muted">Your private link will be generated when creating the project.</small></p>
+                                        </div>
+                                    </div>
+                                </form>
+                                
+                            <div class="alert alert-danger" role="alert" *ngIf="this.error.length > 0">
+                            {{this.error}}
+                            </div>
+                            <div class="alert alert-success" role="alert" *ngIf="this.success.length > 0">
+                            {{this.success}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <button type="submit" class="btn btn-primary" (click)="submit()"><i class="fa fa-save"></i> Create Now</button>
+                    <div class="spinner-grow spinner-grow-sm text-primary ml-2" role="status" *ngIf="loading">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
