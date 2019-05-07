@@ -14,6 +14,13 @@ import { GridsterModule } from 'angular-gridster2';
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomReuseStrategy } from './customReuseStrategy';
 import { AddComponentComponent } from './add-component.component';
+import { PasswordShareComponent } from './password-share/password-share.component';
+import { TabsModule } from 'ngx-bootstrap/tabs';
+import { SecretInputComponent } from './password-share/secret-input.component';
+import { ClipboardModule } from 'ngx-clipboard';
+import { PasswordShareLoginComponent } from './password-share/password-share-login.component';
+
+
 
 @NgModule({
   imports: [
@@ -21,12 +28,17 @@ import { AddComponentComponent } from './add-component.component';
     FormsModule,
     ProjectsRoutingModule,
     GridsterModule,
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    TabsModule,
+    ClipboardModule
   ],
   declarations: [
     ProjectComponent,
     NewProjectComponent,
-    AddComponentComponent
+    AddComponentComponent,
+    PasswordShareComponent,
+    SecretInputComponent,
+    PasswordShareLoginComponent
   ],
   providers: [
     {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
