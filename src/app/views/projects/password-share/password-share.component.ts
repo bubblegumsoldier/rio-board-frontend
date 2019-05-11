@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { PasswordCrypterService } from '../../../services/passwordCrypter.service';
+import { Project } from '../../../models/Project';
+import { PasswordShareComponentService } from '../../../services/passwordShareComponent.service';
 
 @Component({
   templateUrl: 'password-share.component.html',
@@ -8,8 +10,16 @@ import { PasswordCrypterService } from '../../../services/passwordCrypter.servic
 export class PasswordShareComponent implements OnInit {
     
     @Input() mode = "write";
+    _project :Project;
 
-    constructor(private passwordCrypter :PasswordCrypterService)
+    @Input()
+    public set project(project :Project)
+    {
+        this._project = project;
+    }
+
+
+    constructor(private passwordCrypter :PasswordCrypterService, private passwordShareService :PasswordShareComponentService)
     {
 
     }
@@ -48,24 +58,8 @@ export class PasswordShareComponent implements OnInit {
 
     onLogin(e)
     {
-        this.lastUsedPassword = e.password;
-        this.decryptedPasswords = [
-            {
-                title: "Tab-1",
-                items: [
-                    {
-                        key: "Username",
-                        value: "h.muessemann@gmx.de",
-                        type: "text"
-                    },
-                    {
-                        key: "Password",
-                        value: "ABCDERF123",
-                        type: "password"
-                    }
-                ]
-            }
-        ];
+        this.lastUsedPassword = e.cleanPassword;
+        this.decryptedPasswords = e.encryptedText;
     }
 
     addTab()
@@ -115,8 +109,14 @@ export class PasswordShareComponent implements OnInit {
             }
             encryptionPassword = this.newPassword1;
         }
+        let oldEncryptedPassword = this.passwordCrypter.getSHA512(this.lastUsedPassword);
+        let newEncryptedPassword = this.passwordCrypter.getSHA512(encryptionPassword);
         let encryptedStuff = this.passwordCrypter.encryptPasswordShare(this.decryptedPasswords, encryptionPassword);
+        let passwordShareComponent = {
+            password: newEncryptedPassword,
+            encryptedText: encryptedStuff
+        };
         
-        let decryptedStuff = this.passwordCrypter.decryptPasswordShare(encryptedStuff, encryptionPassword);
+        this.passwordShareService.updatePasswordShare(oldEncryptedPassword, passwordShareComponent, this.project);
     }
 }
