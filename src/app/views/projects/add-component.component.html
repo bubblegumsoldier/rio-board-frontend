@@ -1,5 +1,5 @@
 
-<button class="btn btn-pill btn-light" (click)="onPasswordSharingAdd()"><i class="fa fa-key"></i> Add Password Sharing</button>
+<button class="btn btn-pill btn-light" (click)="onPasswordSharingAdd()" *ngIf="!this.project.passwordShareComponent?.active"><i class="fa fa-key"></i> Add Password Sharing</button>
 <button class="btn btn-pill btn-light"><i class="fa fa-link"></i> Add Link Sharing</button>
 <button class="btn btn-pill btn-light"><i class="fa fa-comments"></i> Add Feed</button>
 <button class="btn btn-pill btn-light"><i class="fa fa-percent"></i> Add Progress Visualization</button>

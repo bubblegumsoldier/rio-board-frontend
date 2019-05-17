@@ -14,6 +14,6 @@ export class ProjectService {
     public getProject(projectId :number) :Promise<Project>
     {
         let userId = this.user.getCurrent().id;
-        return this.http.get<Project>('http://localhost:3000/users/' + userId + '/projects/' + projectId).toPromise();
+        return this.http.get<Project>('http://localhost:3000/users/' + userId + '/projects/' + projectId + "?extended=true").toPromise();
     }
 }

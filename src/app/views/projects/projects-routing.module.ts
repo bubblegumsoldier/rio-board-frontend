@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, RouteReuseStrategy } from '@angular/router';
 
 import { NewProjectComponent } from './new-project.component';
 import { ProjectComponent } from './project.component';
+import { CustomReuseStrategy } from './customReuseStrategy';
 
 const routes: Routes = [
   {
@@ -35,6 +36,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
+  ]
 })
 export class ProjectsRoutingModule {}

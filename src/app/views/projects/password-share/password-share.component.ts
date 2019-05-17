@@ -18,13 +18,18 @@ export class PasswordShareComponent implements OnInit {
         this._project = project;
     }
 
+    public get project() :Project
+    {
+        return this._project;
+    }
+
 
     constructor(private passwordCrypter :PasswordCrypterService, private passwordShareService :PasswordShareComponentService)
     {
 
     }
 
-    decryptedPasswords :[any] = undefined;
+    decryptedPasswords :any[] = undefined;
 
     active = 0;
 
@@ -59,7 +64,13 @@ export class PasswordShareComponent implements OnInit {
     onLogin(e)
     {
         this.lastUsedPassword = e.cleanPassword;
-        this.decryptedPasswords = e.encryptedText;
+        if(e.encryptedText.length <= 0)
+        {
+            this.decryptedPasswords = [];
+            this.addTab();
+            return;
+        }
+        this.decryptedPasswords = JSON.parse(this.passwordCrypter.decryptPasswordShare(e.encryptedText, this.lastUsedPassword));
     }
 
     addTab()
@@ -117,6 +128,10 @@ export class PasswordShareComponent implements OnInit {
             encryptedText: encryptedStuff
         };
         
-        this.passwordShareService.updatePasswordShare(oldEncryptedPassword, passwordShareComponent, this.project);
+        this.passwordShareService.updatePasswordShare(oldEncryptedPassword, passwordShareComponent, this.project).then(_ => {
+            this.loading = false;
+        }).catch(_ => {
+            this.loading = false;
+        });
     }
 }

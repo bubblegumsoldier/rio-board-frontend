@@ -21,7 +21,14 @@ export class PasswordShareLoginComponent implements OnInit {
     @Input()
     public set project(project: Project)
     {
+        console.log("project was set ");
+        console.log(project);
         this._project = project;
+    }
+
+    public get project() :Project
+    {
+        return this._project;
     }
 
     constructor(
@@ -61,8 +68,8 @@ export class PasswordShareLoginComponent implements OnInit {
         }
         this.loading = true;
         this.passwordShareComponentService.requestDecrypt(encryptedPW, this.project.id)
-            .then(this.onSuccessfullyRetrieved)
-            .catch(this.onRetrievalError);
+            .then(this.onSuccessfullyRetrieved.bind(this))
+            .catch(this.onRetrievalError.bind(this));
     }
 
     onSuccessfullyRetrieved(data)
@@ -74,7 +81,8 @@ export class PasswordShareLoginComponent implements OnInit {
 
     onRetrievalError(e)
     {
+        console.log(e);
         this.loading = false;
-        this.error = e.message;
+        this.error = "Couldn't log in with given credentials";
     }
 }

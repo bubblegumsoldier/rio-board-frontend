@@ -21,9 +21,12 @@ export class ProjectComponent implements OnInit {
   project :Project;
 
   constructor(private route :ActivatedRoute, private projectService :ProjectService) {
-    // this.route.params.subscribe(params => {
-    //   this.ngOnInit();
-    // });
+    this.route.params.subscribe(params => {
+      this.project = null;
+      setTimeout(_ => {
+        this.ngOnInit();
+      }, 100);
+    });
   }
 
   ngOnInit() {
