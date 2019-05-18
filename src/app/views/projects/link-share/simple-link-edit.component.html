@@ -1,0 +1,30 @@
+<div class="wrapper d-flex align-items-center">
+    <app-simple-link [link]="this.link" *ngIf="!this.isEditMode" style="flex: 1;">
+
+    </app-simple-link>
+    <div class="form-group row" *ngIf="this.isEditMode">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input type="text" id="name" name="name" class="form-control" placeholder="Name / Title" [(ngModel)]="this.link.title">
+            </div>
+            <div class="input-group mt-2">
+                <input type="text" id="name" name="name" class="form-control" placeholder="Short Description" [(ngModel)]="this.link.description">
+            </div>
+            <div class="input-group mt-2">
+                <input type="text" id="name" name="name" class="form-control" placeholder="URL" [(ngModel)]="this.link.link">
+            </div>
+        </div>
+        <div class="col-6 mt-2">
+            <button class="btn btn-secondary btn-sm" (click)="this.cancel()"><i class="fa fa-window-close"></i> Cancel</button>
+        </div>
+        <div class="col-6 mt-2 text-right">
+            <button class="btn btn-primary btn-sm" (click)="this.save()"><i class="fa fa-save"></i> Save</button>
+        </div>
+    </div>
+    <button class="btn btn-pill btn-light" (click)="this.startEdit()" *ngIf="!this.isEditMode">
+        <i class="fa fa-edit"></i>
+    </button>
+    <button class="btn btn-pill btn-danger" (click)="this.delete()" *ngIf="!this.isEditMode">
+        <i class="fa fa-remove"></i>
+    </button>
+</div>

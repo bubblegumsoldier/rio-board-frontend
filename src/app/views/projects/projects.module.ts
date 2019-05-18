@@ -19,6 +19,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { SecretInputComponent } from './password-share/secret-input.component';
 import { ClipboardModule } from 'ngx-clipboard';
 import { PasswordShareLoginComponent } from './password-share/password-share-login.component';
+import { LinkShareComponent } from './link-share/link-share.component';
+import { SimpleLinkComponent } from './link-share/simple-link.component';
+import { EditSimpleLinkEditComponent } from './link-share/simple-link-edit.component';
 
 
 
@@ -38,7 +41,10 @@ import { PasswordShareLoginComponent } from './password-share/password-share-log
     AddComponentComponent,
     PasswordShareComponent,
     SecretInputComponent,
-    PasswordShareLoginComponent
+    PasswordShareLoginComponent,
+    LinkShareComponent,
+    SimpleLinkComponent,
+    EditSimpleLinkEditComponent
   ],
   providers: [
     {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}

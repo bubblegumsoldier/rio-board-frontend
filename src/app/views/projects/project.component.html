@@ -4,7 +4,8 @@
     <h1 class="col-md-12">{{this.project.name}}</h1>
     <p class="text-muted col-md-6">{{this.project.description}}</p>
     <div class="row">
-        <app-password-share [project]="this.project" class="col-md-6" *ngIf="this.project?.passwordShareComponent?.active"></app-password-share>
+        <app-password-share [project]="this.project" class="col-md-6"     *ngIf="this.project?.passwordShareComponent?.active"></app-password-share>
+        <app-link-share     [project]="this.project" class="col col-md-6" *ngIf="this.project?.linkShareComponent?.active"></app-link-share>
         <app-add-component class="col-md-6" [project]="this.project" (onComponentAdded)="this.componentAdded()"></app-add-component>
     </div>
 </div>
