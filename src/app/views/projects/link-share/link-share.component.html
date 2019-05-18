@@ -14,7 +14,7 @@
                 <app-simple-link-edit [link]="link" [index]="i" *ngIf="this.mayWrite" style="flex: 1;" (onEdited)="this.onUpdate()"
                     (onDeleted)="this.onDelete($event)"></app-simple-link-edit>
             </div>
-            <div class="col col-md-6 d-flex">
+            <div class="col col-md-6 d-flex" *ngIf="this.mayWrite">
                 <button class="d-flex mt-4 ml-2 mr-2 custom-add-button align-items-center" style="flex:1" (click)="addLink()">
                     <i class="fa fa-plus p-3 font-2xl mr-3"></i>
                     <strong>Add Link</strong>

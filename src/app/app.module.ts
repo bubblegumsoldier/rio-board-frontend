@@ -27,7 +27,8 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
 const APP_CONTAINERS = [
-  DefaultLayoutComponent
+  DefaultLayoutComponent,
+  ExternalLayoutComponent
 ];
 
 import {
@@ -48,6 +49,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { JwtInterceptor } from './helpers/jwt.interceptor';
 import { FormsModule } from '@angular/forms';
 import { SidebarNavCustomComponent } from './components/sidebar-nav-custom.component';
+import { ExternalLayoutComponent } from './containers/external-layout';
+import { ExternalTokenInterceptor } from './helpers/external-token.interceptor';
 
 @NgModule({
   imports: [
@@ -80,6 +83,7 @@ import { SidebarNavCustomComponent } from './components/sidebar-nav-custom.compo
   },
   { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: ExternalTokenInterceptor, multi: true },
 ],
   bootstrap: [ AppComponent ]
 })

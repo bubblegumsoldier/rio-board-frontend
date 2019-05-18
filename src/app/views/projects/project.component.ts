@@ -5,6 +5,7 @@ import {ActivatedRoute} from '@angular/router';
 import { GridsterConfig, GridsterItem }  from 'angular-gridster2';
 import { Project } from '../../models/Project';
 import { ProjectService } from '../../services/project.service';
+import { ExternalAccessService } from '../../services/externalAccess.service';
 
 
 
@@ -19,8 +20,11 @@ export class ProjectComponent implements OnInit {
   projectId :number;
 
   project :Project;
+  authenticationService: any;
 
-  constructor(private route :ActivatedRoute, private projectService :ProjectService) {
+  mode :string = "read";
+
+  constructor(private route :ActivatedRoute, private projectService :ProjectService, private externalAccessService :ExternalAccessService) {
     this.route.params.subscribe(params => {
       this.project = null;
       setTimeout(_ => {
@@ -35,6 +39,24 @@ export class ProjectComponent implements OnInit {
       this.projectService.getProject(projectId).then(project => {
         this.project = project;
       });
+    if(this.externalAccessService.givenProjectSecurityToken)
+    {
+      if(this.project.publicAccess === 0)
+      {
+        //security error?!
+        //reset project!
+        this.project = new Project();
+      }else if(this.project.publicAccess === 1)
+      {
+        this.mode = "read";
+      }else if(this.project.publicAccess === 2)
+      {
+        this.mode = "write";
+      }
+    }else
+    {
+      this.mode = "write";
+    }
   }
 
   componentAdded()

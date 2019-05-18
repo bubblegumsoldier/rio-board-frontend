@@ -85,4 +85,10 @@ export class PasswordShareLoginComponent implements OnInit {
         this.loading = false;
         this.error = "Couldn't log in with given credentials";
     }
+
+    keyDownFunction(event) {
+        if(event.keyCode == 13) {
+            this.onDecrypt();
+        }
+    }
 }

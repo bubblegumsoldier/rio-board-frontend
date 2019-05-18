@@ -8,4 +8,5 @@ export class Project
     publicAccess :number = 0;
     passwordShareComponent :any;
     linkShareComponent :LinkShareComponent;
+    securityToken :string;
 }
