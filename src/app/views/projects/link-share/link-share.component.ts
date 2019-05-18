@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Project } from '../../../models/Project';
 import { SimpleLink } from '../../../models/SimpleLink';
 import { LinkShareComponentService } from '../../../services/linkShareComponent.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   templateUrl: 'link-share.component.html',
@@ -12,6 +13,7 @@ export class LinkShareComponent implements OnInit {
     
     @Input() mode = "write";
     _project :Project;
+    @ViewChild('warningModal') public warningModal: ModalDirective;
 
     @Input()
     public set project(project :Project)
@@ -73,5 +75,14 @@ export class LinkShareComponent implements OnInit {
 
         this.project.linkShareComponent.simpleLinks.splice(e, 1);
         this.onUpdate();
+    }
+
+    hideComponent()
+    {
+        console.log("hide!");
+        this.warningModal.hide();
+        this.project.linkShareComponent.active = false;
+        this.onUpdate();
+        console.log("update could still be called");
     }
 }

@@ -32,4 +32,10 @@ export class PasswordShareComponentService {
         return this.http.get<Project>('http://localhost:3000/users/' + userId + '/projects/' + projectId + "/" + "passwordShareComponent?password=" + encodeURI(encryptedPassword))
         .toPromise();
     }
+
+    public delete(projectId :string) :Promise<any>
+    {
+        let userId = this.user.getCurrent().id;
+        return this.http.delete<Project>('http://localhost:3000/users/' + userId + '/projects/' + projectId + "/" + "passwordShareComponent").toPromise();
+    }
 }

@@ -1,16 +1,20 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { PasswordCrypterService } from '../../../services/passwordCrypter.service';
 import { Project } from '../../../models/Project';
 import { PasswordShareComponentService } from '../../../services/passwordShareComponent.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
   templateUrl: 'password-share.component.html',
-  selector:"app-password-share"
+  selector:"app-password-share",
+  styleUrls: ['password-share.component.sass']
 })
 export class PasswordShareComponent implements OnInit {
     
     @Input() mode = "write";
     _project :Project;
+
+    @ViewChild('warningModal') public warningModal: ModalDirective;
 
     @Input()
     public set project(project :Project)
@@ -129,9 +133,27 @@ export class PasswordShareComponent implements OnInit {
         };
         
         this.passwordShareService.updatePasswordShare(oldEncryptedPassword, passwordShareComponent, this.project).then(_ => {
+            this.successShown = true;
+            setTimeout(_ => {
+                this.successShown = false;
+            }, 8000);
             this.loading = false;
         }).catch(_ => {
             this.loading = false;
+        });
+    }
+
+    successShown = false;
+
+    hideComponent()
+    {
+        console.log("hide!");
+        this.warningModal.hide();
+        this.passwordShareService.delete(this.project.id).then(_ => {
+            console.log("setting password share component to null");
+            this.project.passwordShareComponent = {};
+        }).catch(e => {
+            console.log(e);
         });
     }
 }

@@ -4,7 +4,7 @@
 <div class="d-flex" [tooltip]="link.description ? tt : undefined">
     <i class="fa fa-link p-3 font-2xl mr-3" style="background-color: #F4B400; color: white;"></i>
     <div *ngIf="this.link">
-        <a href="{{link.link}}">
+        <a href="{{link.link}}" target="_blank">
             <div class="text-value-sm text-primary">{{link.title ? link.title : "Untitled"}}</div>
         </a>
         <div class="text-muted text-uppercase font-weight-bold small">{{getClassification()}}</div>

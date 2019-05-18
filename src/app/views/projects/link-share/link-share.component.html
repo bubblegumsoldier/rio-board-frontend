@@ -1,12 +1,18 @@
 <div class="card">
     <div class="card-header">
         <strong>Link Share</strong>
+        <div class="card-header-actions" *ngIf="this.mayWrite">
+            <a class="card-header-action btn-close" style="cursor: pointer;" (click)="this.warningModal.show()">
+                <i class="icon-close"></i>
+            </a>
+        </div>
     </div>
     <div class="card-body">
         <div class="row">
             <div class="col col-md-6 d-flex mt-4" *ngFor="let link of this.project.linkShareComponent.simpleLinks; let i = index">
                 <app-simple-link [link]="link" *ngIf="!this.mayWrite" style="flex: 1"></app-simple-link>
-                <app-simple-link-edit [link]="link" [index]="i" *ngIf="this.mayWrite" style="flex: 1;" (onEdited)="this.onUpdate()" (onDeleted)="this.onDelete($event)"></app-simple-link-edit>
+                <app-simple-link-edit [link]="link" [index]="i" *ngIf="this.mayWrite" style="flex: 1;" (onEdited)="this.onUpdate()"
+                    (onDeleted)="this.onDelete($event)"></app-simple-link-edit>
             </div>
             <div class="col col-md-6 d-flex">
                 <button class="d-flex mt-4 ml-2 mr-2 custom-add-button align-items-center" style="flex:1" (click)="addLink()">
@@ -17,3 +23,23 @@
         </div>
     </div>
 </div>
+
+<div bsModal #warningModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-warning" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">Are you sure?</h4>
+        <button type="button" class="close" (click)="warningModal.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to remove your link share component? You will not be able to restore your contents afterwards.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="warningModal.hide()">Cancel</button>
+        <button type="button" class="btn btn-warning" (click)="this.hideComponent()">Delete</button>
+    </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

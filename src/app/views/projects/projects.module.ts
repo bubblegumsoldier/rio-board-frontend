@@ -23,7 +23,7 @@ import { LinkShareComponent } from './link-share/link-share.component';
 import { SimpleLinkComponent } from './link-share/simple-link.component';
 import { EditSimpleLinkEditComponent } from './link-share/simple-link-edit.component';
 
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   imports: [
@@ -33,7 +33,8 @@ import { EditSimpleLinkEditComponent } from './link-share/simple-link-edit.compo
     GridsterModule,
     TooltipModule.forRoot(),
     TabsModule,
-    ClipboardModule
+    ClipboardModule,
+    ModalModule.forRoot()
   ],
   declarations: [
     ProjectComponent,
