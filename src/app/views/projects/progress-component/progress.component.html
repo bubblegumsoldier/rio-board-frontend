@@ -1,0 +1,73 @@
+<div class="card">
+    <div class="card-body">
+      <a *ngIf="this.mayWrite" class="card-header-action btn-close float-right" style="cursor: pointer;margin-right: -10px;margin-top: -10px;" (click)="this.warningModal.show()">
+        <i class="icon-close"></i>
+      </a>
+      <div class="row" *ngIf="this.currentMode == 1">
+        <app-edit-progress (onSaved)="this.onSaved()" (onCancel)="this.onCancel()" style="width: 100%;" [project]="this.project" [progressComponent]="this.project.progressComponent"></app-edit-progress>
+      </div>
+        <div class="progress-wrapper mt-1">
+          <div class="progress-row">
+            <ng-container *ngFor="let progressItem of this.project.progressComponent.progressItems; let i = index;">
+              <div class="progress-line" *ngIf="i != 0" [class.active]="i <= this.project.progressComponent.progress"></div>
+              <div class="progress-dot" [class.active]="i <= this.project.progressComponent.progress" [class.selected]="this.selectedStage == i" (click)="this.selectedStage = i;">
+                <p>{{progressItem.title}}</p>
+                <div class="progress-dot-inner">
+                  <i class="fa fa-check" *ngIf="i < this.project.progressComponent.progress"></i>
+                  <div class="text-light spinner-grow spinner-grow-sm" role="status" *ngIf="i == this.project.progressComponent.progress">
+                    <span class="sr-only">Loading...</span>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+
+            <!-- <div class="progress-dot  active">
+              <p>Konzeptionsphase</p>
+              <div class="progress-dot-inner"><i class="fa fa-check"></i></div>
+            </div>
+            <div class="progress-line active"></div>
+            <div class="progress-dot  active">
+              <p>Entwicklungsphase</p>
+              <div class="progress-dot-inner">
+                <div class="text-light spinner-grow spinner-grow-sm" role="status">
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-dot">
+              <p class="text-muted">Übergabe</p>
+              <div class="progress-dot-inner"></div>
+            </div> -->
+          </div>
+          <div class="progress-content mt-4">
+            <p *ngIf="this.project.progressComponent.progressItems?.length <= 0" style="text-align: center; width: 100%;">No stages configured yet. Press "Edit" to start.</p>
+            <h2 *ngIf="this.project.progressComponent.progressItems?.length > 0">{{this.project.progressComponent.progressItems[this.selectedStage].title}}</h2>
+            <div *ngIf="this.project.progressComponent.progressItems?.length > 0" [innerHtml]="this.project.progressComponent.progressItems[this.selectedStage].description">
+            </div>
+          </div>
+          <button class="btn btn-secondary float-right" *ngIf="this.mayWrite" (click)="this.startWriteMode()"><i class="fa fa-pencil"></i> Edit</button>
+        </div>
+    </div>
+</div>
+
+
+<div bsModal #warningModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-warning" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title">Are you sure?</h4>
+            <button type="button" class="close" (click)="warningModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Are you sure you want to remove your link progress visualization component? You will not be able to restore your contents afterwards.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="warningModal.hide()">Cancel</button>
+            <button type="button" class="btn btn-warning" (click)="this.hideComponent()">Delete</button>
+        </div>
+      </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

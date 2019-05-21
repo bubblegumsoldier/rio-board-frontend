@@ -24,6 +24,13 @@ import { SimpleLinkComponent } from './link-share/simple-link.component';
 import { EditSimpleLinkEditComponent } from './link-share/simple-link-edit.component';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ProgressComponent } from './progress-component/progress.component';
+import { EditProgressComponent } from './progress-component/edit-progress.component';
+
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
+import { NgxMasonryModule } from 'ngx-masonry';
+
 
 @NgModule({
   imports: [
@@ -34,7 +41,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TooltipModule.forRoot(),
     TabsModule,
     ClipboardModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    CKEditorModule,
+    NgxMasonryModule
   ],
   declarations: [
     ProjectComponent,
@@ -45,7 +54,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     PasswordShareLoginComponent,
     LinkShareComponent,
     SimpleLinkComponent,
-    EditSimpleLinkEditComponent
+    EditSimpleLinkEditComponent,
+    ProgressComponent,
+    EditProgressComponent
   ],
   providers: [
     {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}

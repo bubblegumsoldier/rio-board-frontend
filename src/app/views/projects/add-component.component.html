@@ -3,4 +3,5 @@
 <button class="btn btn-pill btn-light" (click)="onLinkShareAdd()" *ngIf="!this.project.linkShareComponent?.active"><i
         class="fa fa-link"></i> Add Link Sharing</button>
 <button class="btn btn-pill btn-light"><i class="fa fa-comments"></i> Add Feed</button>
-<button class="btn btn-pill btn-light"><i class="fa fa-percent"></i> Add Progress Visualization</button>
+<button class="btn btn-pill btn-light"  (click)="onProgressAdd()" *ngIf="!this.project.progressComponent?.active"><i
+        class="fa fa-percent"></i> Add Progress Visualization</button>

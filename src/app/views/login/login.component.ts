@@ -8,7 +8,7 @@ import { ParamMap, Router, ActivatedRoute, RouterStateSnapshot } from '@angular/
   templateUrl: 'login.component.html'
 })
 export class LoginComponent {
-  username :string = '';
+  email :string = '';
   password: string = '';
   static HAS_ERROR_QUERY_PARAM = "hasError";
   static HAS_MESSAGE_QUERY_PARAM = "hasMessage";
@@ -21,8 +21,8 @@ export class LoginComponent {
 
   login()
   {
-    console.log("Login attempt for username " + this.username);
-    this.authenticationService.login(this.username, this.password).subscribe(_ => {
+    console.log("Login attempt for email " + this.email);
+    this.authenticationService.login(this.email, this.password).subscribe(_ => {
       this.router.navigate(["/"]);
     }, err => {
       var url = window.location.href.replace("hasMessage", "oldMessage");

@@ -38,4 +38,9 @@ export class UserService {
     {
         return Promise.all([this.http.put<User>('http://localhost:3000/users/own', newUser).toPromise(), this.syncCurrent().toPromise()]);
     }
+
+    register(newUser)
+    {
+        return this.http.post<void>('http://localhost:3000/users/', newUser).toPromise();
+    }
 }

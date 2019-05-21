@@ -1,21 +1,19 @@
 <div class="card">
-    <div class="card-header">
-        <strong>Link Share</strong>
-        <div class="card-header-actions" *ngIf="this.mayWrite">
-            <a class="card-header-action btn-close" style="cursor: pointer;" (click)="this.warningModal.show()">
-                <i class="icon-close"></i>
-            </a>
-        </div>
-    </div>
     <div class="card-body">
+      <a *ngIf="this.mayWrite" class="card-header-action btn-close float-right" style="cursor: pointer;margin-right: -10px;margin-top: -10px;" (click)="this.warningModal.show()">
+        <i class="icon-close"></i>
+      </a>
         <div class="row">
-            <div class="col col-md-6 d-flex mt-4" *ngFor="let link of this.project.linkShareComponent.simpleLinks; let i = index">
+          <div class="col col-md-12 mb-4">
+            <strong>Links</strong>
+            </div>
+            <div class="col col-md-6 mb-4 d-flex" *ngFor="let link of this.project.linkShareComponent.simpleLinks; let i = index">
                 <app-simple-link [link]="link" *ngIf="!this.mayWrite" style="flex: 1"></app-simple-link>
                 <app-simple-link-edit [link]="link" [index]="i" *ngIf="this.mayWrite" style="flex: 1;" (onEdited)="this.onUpdate()"
                     (onDeleted)="this.onDelete($event)"></app-simple-link-edit>
             </div>
             <div class="col col-md-6 d-flex" *ngIf="this.mayWrite">
-                <button class="d-flex mt-4 ml-2 mr-2 custom-add-button align-items-center" style="flex:1" (click)="addLink()">
+                <button class="d-flex ml-2 mb-4 mr-2 custom-add-button align-items-center" style="flex:1" (click)="addLink()">
                     <i class="fa fa-plus p-3 font-2xl mr-3"></i>
                     <strong>Add Link</strong>
                 </button>
