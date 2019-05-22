@@ -1,0 +1,10 @@
+<div class="row d-flex mt-2 ml-2 mr-2 mb-4">
+  <div class="image-wrapper mr-4">
+    <img src="/assets/img/avatars/default_profile_pic.png">
+  </div>
+  <div class="input-wrapper">
+    <ckeditor (change)="this.descriptionChanged($event)" style="width: 100%; min-height: 200px; margin-bottom: 20px;" [editor]="Editor" [data]="''"></ckeditor>
+    <button class="btn btn-ghost-info mt-2"><i class="fa fa-paperclip"></i> Add Attachment</button>
+    <button class="btn btn-primary mt-2 float-right"><i class="fa fa-send"></i> Send</button>
+  </div>
+</div>

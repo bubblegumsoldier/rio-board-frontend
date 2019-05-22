@@ -1,0 +1,53 @@
+<div class="card">
+    <div class="card-body">
+      <a *ngIf="this.mayWrite" class="card-header-action btn-close float-right" style="cursor: pointer;margin-right: -10px;margin-top: -10px;" (click)="this.warningModal.show()">
+        <i class="icon-close"></i>
+      </a>
+        <div class="row">
+          <div class="col col-md-12 mb-4">
+            <strong>Feed</strong>
+            <div class="mt-4">
+              <app-feed-input></app-feed-input>
+              <app-feed-message></app-feed-message>
+              <hr>
+              <app-feed-message></app-feed-message>
+              <hr>
+              <div class="bg-light d-flex px-4" style="border-radius: 5px">
+                <span class="text-muted align-self-center mt-4 mb-4"><b>This message has been deleted</b></span>
+              </div>
+              <hr>
+              <app-feed-message></app-feed-message>
+              <hr>
+              <app-feed-message></app-feed-message>
+
+              <div class="pagination float-right">
+                <button class="btn btn-sm btn-ghost-secondary ml-2">1</button>
+                <button class="btn btn-sm btn-secondary ml-2">2</button>
+                <button class="btn btn-sm btn-ghost-secondary ml-2">3</button>
+                <button class="btn btn-sm btn-ghost-secondary ml-2">4</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div bsModal #warningModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-warning" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">Are you sure?</h4>
+        <button type="button" class="close" (click)="warningModal.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to remove your link share component? You will not be able to restore your contents afterwards.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="warningModal.hide()">Cancel</button>
+        <button type="button" class="btn btn-warning" (click)="this.hideComponent()">Delete</button>
+    </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

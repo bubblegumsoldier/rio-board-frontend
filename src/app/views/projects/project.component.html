@@ -5,6 +5,7 @@
     <p class="text-muted col-md-6">{{this.project.description}}</p>
     <div class="row">
         <app-progress       [mode]="this.mode" [project]="this.project" class="col col-md-6" *ngIf="this.project?.progressComponent?.active"></app-progress>
+        <app-feed class="col col-md-6" ></app-feed>
         <app-password-share [mode]="this.mode" [project]="this.project" class="col col-md-6" *ngIf="this.project?.passwordShareComponent?.active"></app-password-share>
         <app-link-share     [mode]="this.mode" [project]="this.project" class="col col-md-6" *ngIf="this.project?.linkShareComponent?.active"></app-link-share>
         <app-add-component *ngIf="this.mode == 'write'" class="col-md-6" [project]="this.project" (onComponentAdded)="this.componentAdded()"></app-add-component>

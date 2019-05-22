@@ -1,0 +1,44 @@
+<button class="btn btn-ghost-secondary float-right" (click)="this.warningModal.show()"><i class="fa fa-close"></i></button>
+<div class="row d-flex mt-2 ml-2 mr-2">
+  <div class="image-wrapper mr-4">
+    <img src="/assets/img/avatars/default_profile_pic.png">
+    </div>
+  <div class="input-wrapper">
+    <div class="">
+      <div class="username text-muted"><b>Henry Müssemann</b></div>
+      <div class="text-muted"><small>Posted on 27th of March, 2019 (10:40 pm)</small></div>
+    </div>
+    <div class="text-content mt-2">
+      <p>Das ist der Haupt-Text und hier ist auch etwas <b>fett geschrieben... alles gut.</b></p>
+      <ul>
+        <li>Mit Text hier und Text hier </li>
+        <li>Und natürlich hier...</li>
+      </ul>
+    </div>
+    <div class="attachment-content">
+      <button class="btn btn-ghost-info"><i class="fa fa-paperclip"></i> Anhang_1.docx</button>
+      <button class="btn btn-ghost-info"><i class="fa fa-paperclip"></i> Anhang_2.zip</button>
+      <button class="btn btn-ghost-info"><i class="fa fa-paperclip"></i> Anhang_3.xlsx</button>
+    </div>
+  </div>
+</div>
+
+<div bsModal #warningModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-warning" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h4 class="modal-title">Are you sure?</h4>
+        <button type="button" class="close" (click)="warningModal.hide()" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Are you sure you want to hide the message? It will not be deleted but instead a message will be shown that the message has been deleted.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="warningModal.hide()">Cancel</button>
+        <button type="button" class="btn btn-warning" (click)="this.hideComponent()">Delete</button>
+    </div>
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

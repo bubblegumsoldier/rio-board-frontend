@@ -30,7 +30,9 @@ import { EditProgressComponent } from './progress-component/edit-progress.compon
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 import { NgxMasonryModule } from 'ngx-masonry';
-
+import { FeedComponent } from './feed/feed.component';
+import { FeedInputComponent } from './feed/feed-input.component';
+import { FeedMessage } from './feed/feed-message.component';
 
 @NgModule({
   imports: [
@@ -56,7 +58,10 @@ import { NgxMasonryModule } from 'ngx-masonry';
     SimpleLinkComponent,
     EditSimpleLinkEditComponent,
     ProgressComponent,
-    EditProgressComponent
+    EditProgressComponent,
+    FeedInputComponent,
+    FeedComponent,
+    FeedMessage
   ],
   providers: [
     {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}

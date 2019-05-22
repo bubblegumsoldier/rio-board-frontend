@@ -14,7 +14,6 @@ export class RegisterComponent implements OnInit{
 
   }
 
-  username :string = "";
   email :string = "";
   password :string = "";
   password2 :string = "";
@@ -31,11 +30,6 @@ export class RegisterComponent implements OnInit{
   onRegister()
   {
     this.errorMsg = "";
-    if(this.username.length < 4)
-    {
-      this.errorMsg = "Username too short. Please choose a longer username (min 4 characters)."
-      return;
-    }
     if(this.firstName.length < 1 || this.lastName.length < 1)
     {
       this.errorMsg = "Name is too short";
@@ -57,7 +51,6 @@ export class RegisterComponent implements OnInit{
       return;
     }
     this.userService.register({
-      username: this.username,
       password: this.password,
       email: this.email,
       firstname: this.firstName,
