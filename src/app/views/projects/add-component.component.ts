@@ -3,6 +3,7 @@ import { Project } from '../../models/Project';
 import { PasswordShareService } from '../../services/passwordShare.service';
 import { LinkShareComponentService } from '../../services/linkShareComponent.service';
 import { ProgressComponentService } from '../../services/progressComponent.service';
+import { FeedComponentService } from '../../services/feedComponent.service';
 
 @Component({
   templateUrl: 'add-component.component.html',
@@ -15,7 +16,8 @@ export class AddComponentComponent implements OnInit {
     constructor(
         private passwordShareService :PasswordShareService,
         private linkShareComponentService :LinkShareComponentService,
-        private progressComponentService :ProgressComponentService
+        private progressComponentService :ProgressComponentService,
+        private feedComponentService :FeedComponentService
       )
      {
 
@@ -51,6 +53,15 @@ export class AddComponentComponent implements OnInit {
     onProgressAdd()
     {
       this.progressComponentService.addToProject(this.project).then(_ => {
+        this.onComponentAdded.emit();
+      }).catch(e => {
+        console.log(e);
+      });
+    }
+
+    onFeedAdd()
+    {
+      this.feedComponentService.addToProject(this.project).then(_ => {
         this.onComponentAdded.emit();
       }).catch(e => {
         console.log(e);

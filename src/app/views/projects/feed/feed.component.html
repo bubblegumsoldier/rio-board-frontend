@@ -7,24 +7,18 @@
           <div class="col col-md-12 mb-4">
             <strong>Feed</strong>
             <div class="mt-4">
-              <app-feed-input></app-feed-input>
-              <app-feed-message></app-feed-message>
-              <hr>
-              <app-feed-message></app-feed-message>
-              <hr>
-              <div class="bg-light d-flex px-4" style="border-radius: 5px">
-                <span class="text-muted align-self-center mt-4 mb-4"><b>This message has been deleted</b></span>
-              </div>
-              <hr>
-              <app-feed-message></app-feed-message>
-              <hr>
-              <app-feed-message></app-feed-message>
-
+              <app-feed-input (onSend)="this.onSend($event)"></app-feed-input>
+              <ng-container *ngFor="let feedMessage of this.currentSortedMessages(); let i = index;">
+                <hr *ngIf="i != 0">
+                <app-feed-message [mode]="this.mode" [feedMessage]="feedMessage" *ngIf="!feedMessage.deleted" (onDelete)="this.onDeleteMessage(i)"></app-feed-message>
+                <div class="bg-light d-flex px-4" style="border-radius: 5px" *ngIf="feedMessage.deleted">
+                  <span class="text-muted align-self-center mt-4 mb-4"><b>This message has been deleted</b></span>
+                </div>
+              </ng-container>
               <div class="pagination float-right">
-                <button class="btn btn-sm btn-ghost-secondary ml-2">1</button>
-                <button class="btn btn-sm btn-secondary ml-2">2</button>
-                <button class="btn btn-sm btn-ghost-secondary ml-2">3</button>
-                <button class="btn btn-sm btn-ghost-secondary ml-2">4</button>
+                <ng-container *ngFor="let x of pageArray; let i = index">
+                  <button (click)="this.currentPage = i" class="btn btn-sm ml-2" [class.btn-ghost-secondary]="i != this.currentPage" [class.btn-primary]="i == this.currentPage">{{i+1}}</button>
+                </ng-container>
               </div>
             </div>
           </div>

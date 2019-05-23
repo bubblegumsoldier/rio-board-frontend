@@ -3,8 +3,13 @@
     <img src="/assets/img/avatars/default_profile_pic.png">
   </div>
   <div class="input-wrapper">
-    <ckeditor (change)="this.descriptionChanged($event)" style="width: 100%; min-height: 200px; margin-bottom: 20px;" [editor]="Editor" [data]="''"></ckeditor>
-    <button class="btn btn-ghost-info mt-2"><i class="fa fa-paperclip"></i> Add Attachment</button>
-    <button class="btn btn-primary mt-2 float-right"><i class="fa fa-send"></i> Send</button>
+    <ckeditor [(ngModel)]="this.currentText" style="width: 100%; min-height: 200px; margin-bottom: 20px;" [editor]="Editor" [data]="''"></ckeditor>
+    <a href="{{attachment.url}}" target="_blank" *ngFor="let attachment of uploadedFiles">
+      <button class="btn btn-ghost-secondary mt-2"><i class="fa fa-paperclip"></i> {{attachment.filename}}</button>
+    </a>
+    <app-file-stack [data-accept]="AppLitteralsConfig.uploadOthers" data-maxFiles="6" (complete)="onFileStackUploadComplete($event)">
+      <button class="btn btn-ghost-info mt-2"><i class="fa fa-paperclip"></i> Add Attachment</button>
+    </app-file-stack>
+      <button class="btn btn-primary mt-2 float-right" (click)="this.onSendClicked()"><i class="fa fa-send"></i> Send</button>
   </div>
 </div>

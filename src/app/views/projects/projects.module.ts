@@ -32,7 +32,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NgxMasonryModule } from 'ngx-masonry';
 import { FeedComponent } from './feed/feed.component';
 import { FeedInputComponent } from './feed/feed-input.component';
-import { FeedMessage } from './feed/feed-message.component';
+import { FeedMessageComponent } from './feed/feed-message.component';
+import { FileStackComponent } from './filestack/file-stack.component';
 
 @NgModule({
   imports: [
@@ -61,7 +62,8 @@ import { FeedMessage } from './feed/feed-message.component';
     EditProgressComponent,
     FeedInputComponent,
     FeedComponent,
-    FeedMessage
+    FeedMessageComponent,
+    FileStackComponent
   ],
   providers: [
     {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}

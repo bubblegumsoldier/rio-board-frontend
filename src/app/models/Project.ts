@@ -1,5 +1,6 @@
 import { LinkShareComponent } from './LinkShareComponent';
 import { ProgressComponent } from './ProgressComponent';
+import { FeedComponent } from './FeedComponent';
 
 export class Project
 {
@@ -10,5 +11,6 @@ export class Project
     passwordShareComponent :any;
     linkShareComponent :LinkShareComponent;
     progressComponent :ProgressComponent;
+    feedComponent :FeedComponent;
     securityToken :string;
 }

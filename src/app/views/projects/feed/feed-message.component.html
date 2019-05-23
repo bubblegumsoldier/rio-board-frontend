@@ -1,24 +1,23 @@
-<button class="btn btn-ghost-secondary float-right" (click)="this.warningModal.show()"><i class="fa fa-close"></i></button>
+<button class="btn btn-ghost-secondary float-right" *ngIf="this.mayWrite" (click)="this.warningModal.show()"><i class="fa fa-close"></i></button>
 <div class="row d-flex mt-2 ml-2 mr-2">
   <div class="image-wrapper mr-4">
     <img src="/assets/img/avatars/default_profile_pic.png">
     </div>
   <div class="input-wrapper">
     <div class="">
-      <div class="username text-muted"><b>Henry Müssemann</b></div>
-      <div class="text-muted"><small>Posted on 27th of March, 2019 (10:40 pm)</small></div>
+      <div class="username text-muted"><b>{{currentName}}</b></div>
+      <div class="text-muted"><small>Posted on {{this.feedMessage.createdAt | date:'medium'}}</small></div>
     </div>
-    <div class="text-content mt-2">
-      <p>Das ist der Haupt-Text und hier ist auch etwas <b>fett geschrieben... alles gut.</b></p>
-      <ul>
-        <li>Mit Text hier und Text hier </li>
-        <li>Und natürlich hier...</li>
-      </ul>
+    <div class="text-content mt-2" [innerHtml]="this.feedMessage.message">
+
     </div>
     <div class="attachment-content">
-      <button class="btn btn-ghost-info"><i class="fa fa-paperclip"></i> Anhang_1.docx</button>
+      <a href="{{a.url}}" target="_blank" *ngFor="let a of attachments">
+        <img src="{{a.url}}" class="attachment-image" *ngIf="this.isImage(a)"><button class="btn btn-ghost-info"><i class="fa fa-paperclip"></i> {{a.filename}}</button>
+      </a>
+      <!-- <button class="btn btn-ghost-info"><i class="fa fa-paperclip"></i> Anhang_1.docx</button>
       <button class="btn btn-ghost-info"><i class="fa fa-paperclip"></i> Anhang_2.zip</button>
-      <button class="btn btn-ghost-info"><i class="fa fa-paperclip"></i> Anhang_3.xlsx</button>
+      <button class="btn btn-ghost-info"><i class="fa fa-paperclip"></i> Anhang_3.xlsx</button> -->
     </div>
   </div>
 </div>
@@ -37,7 +36,7 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="warningModal.hide()">Cancel</button>
-        <button type="button" class="btn btn-warning" (click)="this.hideComponent()">Delete</button>
+        <button type="button" class="btn btn-warning" (click)="this.deleteMessage()">Delete</button>
     </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
