@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class UserIdToNameService {
     constructor(private http :HttpClient)
@@ -18,7 +20,7 @@ export class UserIdToNameService {
               lastName: "User"
             });
           }
-          this.http.get<any>("http://localhost:3000/users/" + userId + "/name").toPromise()
+          this.http.get<any>(environment.apiUrl + "/users/" + userId + "/name").toPromise()
           .then(v => {resolve(v)}).catch(e => {reject(e)});
         });
     }

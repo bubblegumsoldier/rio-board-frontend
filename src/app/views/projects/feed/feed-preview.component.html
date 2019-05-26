@@ -1,0 +1,4 @@
+<div class="" *ngIf="this.hasMessage">
+  <div class="text-light"><b><i class="fa fa-user"></i> {{this.currentName}}</b></div>
+  <div [innerHtml]="this.lastMessage.message"></div>
+</div>

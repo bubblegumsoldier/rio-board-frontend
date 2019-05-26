@@ -37,7 +37,7 @@ export class EditProgressComponent implements OnInit {
     this._progressComponent = progressComponent;
     if(!progressComponent.progressItems || progressComponent.progressItems.length <= 0)
     {
-      progressComponent.progressItems = [new ProgressItem()];
+      this.onTabAdd();
     }
   }
 

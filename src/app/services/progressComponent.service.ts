@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { ProgressComponent } from '../models/ProgressComponent';
 import { SimpleLink } from '../models/SimpleLink';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class ProgressComponentService {
     constructor(private http :HttpClient, private user :UserService)
@@ -18,7 +20,7 @@ export class ProgressComponentService {
         let userId = this.user.getCurrent().id;
         let progressComponent :ProgressComponent = new ProgressComponent();
         progressComponent.active = true;
-        return this.http.post<any>('http://localhost:3000/users/' + userId + '/projects/' + project.id + "/progressComponent?extended=true", progressComponent)
+        return this.http.post<any>(environment.apiUrl + '/users/' + userId + '/projects/' + project.id + "/progressComponent?extended=true", progressComponent)
             .toPromise()
             .then(progressComponent => {project.progressComponent = progressComponent;});
     }
@@ -26,7 +28,7 @@ export class ProgressComponentService {
     public updateProgress(project :Project) :Promise<any>
     {
         let userId = this.user.getCurrent().id;
-        return this.http.put<any>('http://localhost:3000/users/' + userId + '/projects/' + project.id + "/progressComponent?extended=true", project.progressComponent)
+        return this.http.put<any>(environment.apiUrl + '/users/' + userId + '/projects/' + project.id + "/progressComponent?extended=true", project.progressComponent)
             .toPromise();
     }
 }

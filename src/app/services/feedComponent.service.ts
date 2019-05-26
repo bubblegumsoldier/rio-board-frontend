@@ -6,6 +6,8 @@ import { map } from 'rxjs/operators';
 import { FeedComponent } from '../models/FeedComponent';
 import { FeedMessage } from '../models/FeedMessage';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class FeedComponentService {
     constructor(private http :HttpClient, private user :UserService)
@@ -18,7 +20,7 @@ export class FeedComponentService {
         let userId = this.user.getCurrent().id;
         let feedComponent :FeedComponent = new FeedComponent();
         feedComponent.active = true;
-        return this.http.post<any>('http://localhost:3000/users/' + userId + '/projects/' + project.id + "/feedComponent?extended=true", feedComponent)
+        return this.http.post<any>(environment.apiUrl + '/users/' + userId + '/projects/' + project.id + "/feedComponent?extended=true", feedComponent)
             .toPromise()
             .then(feedComponent => {project.feedComponent = feedComponent;});
     }
@@ -26,7 +28,17 @@ export class FeedComponentService {
     public updateFeedComponentInProject(project :Project) :Promise<any>
     {
       let userId = this.user.getCurrent().id;
-      return this.http.get<FeedComponent>('http://localhost:3000/users/' + userId + '/projects/' + project.id + '/feedComponent?extended=true')
+      return this.http.get<FeedComponent>(environment.apiUrl + '/users/' + userId + '/projects/' + project.id + '/feedComponent?extended=true')
+        .toPromise()
+        .then((feedComponent :FeedComponent) => {
+          project.feedComponent = feedComponent;
+      });
+    }
+
+    public updateFeedComponent(project :Project) :Promise<any>
+    {
+      let userId = this.user.getCurrent().id;
+      return this.http.post<FeedComponent>(environment.apiUrl + '/users/' + userId + '/projects/' + project.id + '/feedComponent?extended=true', project)
         .toPromise()
         .then((feedComponent :FeedComponent) => {
           project.feedComponent = feedComponent;
@@ -36,7 +48,7 @@ export class FeedComponentService {
     addMessage(message :FeedMessage, project :Project) :Promise<any>
     {
       let userId = this.user.getCurrent().id;
-      return this.http.post<FeedMessage>('http://localhost:3000/users/' + userId + '/projects/' + project.id + '/feedComponent/feedMessages', message)
+      return this.http.post<FeedMessage>(environment.apiUrl + '/users/' + userId + '/projects/' + project.id + '/feedComponent/feedMessages', message)
         .toPromise()
         .then((m :FeedMessage) => {
           project.feedComponent.feedMessages.push(m);
@@ -46,7 +58,7 @@ export class FeedComponentService {
     deleteMessage(message :FeedMessage, project :Project) :Promise<any>
     {
       let userId = this.user.getCurrent().id;
-      return this.http.delete<any>('http://localhost:3000/users/' + userId + '/projects/' + project.id + '/feedComponent/feedMessages/' + message.id)
+      return this.http.delete<any>(environment.apiUrl + '/users/' + userId + '/projects/' + project.id + '/feedComponent/feedMessages/' + message.id)
         .toPromise();
     }
 }

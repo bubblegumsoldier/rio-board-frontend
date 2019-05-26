@@ -4,6 +4,8 @@ import { Project } from '../models/Project';
 import { UserService } from './user.service';
 import { map } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class ProjectsService {
 
@@ -18,13 +20,13 @@ export class ProjectsService {
     public getProjects() :Promise<any>
     {
         let userId = this.user.getCurrent().id;
-        return this.http.get('http://localhost:3000/users/' + userId + '/projects').toPromise();
+        return this.http.get(environment.apiUrl + '/users/' + userId + '/projects?extended=true').toPromise();
     }
 
     public createProject(project :Project) :Promise<any>
     {
         let userId = this.user.getCurrent().id;
         console.log(project);
-        return this.http.post('http://localhost:3000/users/' + userId + '/projects', project).toPromise().then(v => {this.updatedProjects.emit(); return v;});
+        return this.http.post(environment.apiUrl + '/users/' + userId + '/projects', project).toPromise().then(v => {this.updatedProjects.emit(); return v;});
     }
 }

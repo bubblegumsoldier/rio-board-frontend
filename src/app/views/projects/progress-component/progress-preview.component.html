@@ -1,0 +1,12 @@
+<div class="progress-wrapper">
+  <div *ngIf="this.progressComponent" class="progress-row">
+    <ng-container *ngFor="let progressItem of this.progressComponent.progressItems; let i = index;">
+      <div class="progress-line" *ngIf="i != 0" [class.active]="i <= this.progressComponent.progress"></div>
+      <div class="progress-dot" [class.active]="i <= this.progressComponent.progress">
+        <div class="progress-dot-inner">
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <p class="text-light"><small><strong>{{this.progressComponent.progressItems[this.progressComponent.progress].title}}</strong></small></p>
+</div>

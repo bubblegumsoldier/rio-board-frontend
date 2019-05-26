@@ -4,6 +4,8 @@ import { Project } from '../models/Project';
 import { UserService } from './user.service';
 import { map } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class PasswordShareComponentService {
     constructor(private http :HttpClient, private user :UserService)
@@ -19,9 +21,9 @@ export class PasswordShareComponentService {
               'Authorization': 'my-auth-token'
             })
           };
-          
+
         let userId = this.user.getCurrent().id;
-        return this.http.put<Project>('http://localhost:3000/users/' + userId + '/projects/' + project.id + "/" + "passwordShareComponent?password=" + encodeURI(oldEncryptedPW), JSON.stringify(passwordShare), httpOptions)
+        return this.http.put<Project>(environment.apiUrl + '/users/' + userId + '/projects/' + project.id + "/" + "passwordShareComponent?password=" + encodeURI(oldEncryptedPW), JSON.stringify(passwordShare), httpOptions)
         .toPromise()
         ;
     }
@@ -29,13 +31,13 @@ export class PasswordShareComponentService {
     public requestDecrypt(encryptedPassword :string, projectId :string) :Promise<any>
     {
         let userId = this.user.getCurrent().id;
-        return this.http.get<Project>('http://localhost:3000/users/' + userId + '/projects/' + projectId + "/" + "passwordShareComponent?password=" + encodeURI(encryptedPassword))
+        return this.http.get<Project>(environment.apiUrl + '/users/' + userId + '/projects/' + projectId + "/" + "passwordShareComponent?password=" + encodeURI(encryptedPassword))
         .toPromise();
     }
 
     public delete(projectId :string) :Promise<any>
     {
         let userId = this.user.getCurrent().id;
-        return this.http.delete<Project>('http://localhost:3000/users/' + userId + '/projects/' + projectId + "/" + "passwordShareComponent").toPromise();
+        return this.http.delete<Project>(environment.apiUrl + '/users/' + userId + '/projects/' + projectId + "/" + "passwordShareComponent").toPromise();
     }
 }

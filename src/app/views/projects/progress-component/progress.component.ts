@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Project } from '../../../models/Project';
 import { SimpleLink } from '../../../models/SimpleLink';
-import { LinkShareComponentService } from '../../../services/linkShareComponent.service';
+import { ProgressComponentService } from '../../../services/progressComponent.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -34,7 +34,7 @@ export class ProgressComponent implements OnInit {
     selectedStage :number = 0;
 
 
-    constructor(private linkShareComponentService :LinkShareComponentService)
+    constructor(private progressComponentService :ProgressComponentService)
     {
 
     }
@@ -62,12 +62,14 @@ export class ProgressComponent implements OnInit {
 
     save()
     {
-
     }
 
     onUpdate()
     {
-
+      this.progressComponentService.updateProgress(this.project).then(_ => {
+      }).catch(e => {
+        console.log(e);
+      });
     }
 
     onSaved()
@@ -85,6 +87,10 @@ export class ProgressComponent implements OnInit {
 
     hideComponent()
     {
-
+        console.log("hide!");
+        this.warningModal.hide();
+        this.project.progressComponent.active = false;
+        this.onUpdate();
+        console.log("update could still be called");
     }
 }

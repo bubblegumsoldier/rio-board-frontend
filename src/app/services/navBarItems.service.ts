@@ -34,9 +34,30 @@ export class NavBarItemsService {
             icon: 'icon-user'
           },
           {
-            name: 'Payment',
+            name: 'Billing',
             url: '/settings/payment',
             icon: 'fa fa-dollar'
+          }
+        ]
+      },
+      {
+        name: "Legal",
+        icon: 'fa fa-balance-scale',
+        children: [
+          {
+            name: "Terms of Service",
+            url: "https://project-sheets.com/terms-of-service",
+            icon: "fa fa-external-link"
+          },
+          {
+            name: "Data Protection",
+            url: "https://project-sheets.com/data-protection",
+            icon: "fa fa-external-link"
+          },
+          {
+            name: "Impressum",
+            url: "https://project-sheets.com/impressum",
+            icon: "fa fa-external-link"
           }
         ]
       }

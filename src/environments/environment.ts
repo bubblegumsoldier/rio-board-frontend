@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   filestackConfig: {
     key: 'AroepMNBRaqXhiNGKaK0Qz'
-  }
+  },
+  apiUrl: 'http://localhost:3000'
 };

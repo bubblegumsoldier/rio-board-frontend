@@ -5,6 +5,8 @@ import { map } from 'rxjs/operators';
 
 import { User } from '../models/User';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>;
@@ -20,7 +22,7 @@ export class AuthenticationService {
     }
 
     login(username: string, password: string) {
-        return this.http.post<any>(`http://localhost:3000/auth`, { username: username, password: password })
+        return this.http.post<any>(environment.apiUrl + `/auth`, { username: username, password: password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
                 if (user && user.token) {

@@ -34,6 +34,8 @@ import { FeedComponent } from './feed/feed.component';
 import { FeedInputComponent } from './feed/feed-input.component';
 import { FeedMessageComponent } from './feed/feed-message.component';
 import { FileStackComponent } from './filestack/file-stack.component';
+import { ProgressPreviewComponent } from './progress-component/progress-preview.component';
+import { FeedPreviewComponent } from './feed/feed-preview.component';
 
 @NgModule({
   imports: [
@@ -63,10 +65,16 @@ import { FileStackComponent } from './filestack/file-stack.component';
     FeedInputComponent,
     FeedComponent,
     FeedMessageComponent,
-    FileStackComponent
+    FileStackComponent,
+    ProgressPreviewComponent,
+    FeedPreviewComponent
   ],
   providers: [
     {provide: RouteReuseStrategy, useClass: CustomReuseStrategy}
+  ],
+  exports: [
+    ProgressPreviewComponent,
+    FeedPreviewComponent
   ]
 })
 export class ProjectsModule { }

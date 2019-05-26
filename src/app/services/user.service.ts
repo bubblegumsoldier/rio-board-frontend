@@ -6,12 +6,14 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExternalAccessService } from './externalAccess.service';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class UserService {
     constructor(private http: HttpClient, private route :ActivatedRoute, private router :Router, private externalAccess :ExternalAccessService) { }
 
     getAll() {
-        return this.http.get<User[]>(`http://localhost:3000/users`);
+        return this.http.get<User[]>(environment.apiUrl + `/users`);
     }
 
     getCurrent()
@@ -27,7 +29,7 @@ export class UserService {
 
     syncCurrent() :Observable<User>
     {
-        return this.http.get<User>('http://localhost:3000/users/own').pipe(map((result) => {
+        return this.http.get<User>(environment.apiUrl + '/users/own').pipe(map((result) => {
             console.log(result);
             localStorage.setItem("currentUser", JSON.stringify(result));
             return result;
@@ -36,11 +38,11 @@ export class UserService {
 
     updateCurrent(newUser)
     {
-        return Promise.all([this.http.put<User>('http://localhost:3000/users/own', newUser).toPromise(), this.syncCurrent().toPromise()]);
+        return Promise.all([this.http.put<User>(environment.apiUrl + '/users/own', newUser).toPromise(), this.syncCurrent().toPromise()]);
     }
 
     register(newUser)
     {
-        return this.http.post<void>('http://localhost:3000/users/', newUser).toPromise();
+        return this.http.post<void>(environment.apiUrl + '/users/', newUser).toPromise();
     }
 }

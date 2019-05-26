@@ -55,12 +55,21 @@ export class FeedComponent implements OnInit {
       this.currentPage = i;
     }
 
+    onUpdate()
+    {
+      this.feedComponentService.updateFeedComponent(this.project).then(_ => {
+
+      }).catch(_ => {
+
+      });
+    }
+
     hideComponent()
     {
         console.log("hide!");
         this.warningModal.hide();
-        this.project.linkShareComponent.active = false;
-        //this.onUpdate();
+        this.project.feedComponent.active = false;
+        this.onUpdate();
         console.log("update could still be called");
     }
 

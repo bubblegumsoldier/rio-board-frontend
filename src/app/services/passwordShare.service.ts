@@ -4,6 +4,8 @@ import { Project } from '../models/Project';
 import { UserService } from './user.service';
 import { map } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({ providedIn: 'root' })
 export class PasswordShareService {
     constructor(private http :HttpClient, private user :UserService)
@@ -19,7 +21,7 @@ export class PasswordShareService {
             encryptedText: "",
             active: true
         }
-        return this.http.post<any>('http://localhost:3000/users/' + userId + '/projects/' + project.id + "/passwordShareComponent", passwordShare)
+        return this.http.post<any>(environment.apiUrl + '/users/' + userId + '/projects/' + project.id + "/passwordShareComponent", passwordShare)
             .toPromise()
             .then(passwordShareComponent => {project.passwordShareComponent = passwordShareComponent;});
     }
